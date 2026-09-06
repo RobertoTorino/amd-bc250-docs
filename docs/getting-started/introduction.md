@@ -44,7 +44,7 @@ With proper Linux setup, the BC-250 delivers performance comparable to:
 - **No hardware video encode/decode** — VCN firmware is blocked by Sony, software decoding only
 - Audio over DisplayPort can be unreliable with some adapters (passive adapters usually work)
 - No built-in WiFi/Bluetooth (USB adapters work)
-- Limited instruction set (some AVX features missing)
+- Reduced floating-point throughput versus desktop Zen 2: the instruction set is complete, AVX2 included, but the 256-bit FPU datapath is halved (see [CPU specifications](../hardware/specifications.md#cpu-specifications))
 - High idle power consumption (~50-80W without optimization)
 
 !!!danger "Do NOT Use Smokeless_UMAF"
