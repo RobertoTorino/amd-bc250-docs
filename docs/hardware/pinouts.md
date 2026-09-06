@@ -203,7 +203,10 @@ Alternative power connectors compatible with Molex Micro-Fit BMI [444280801](htt
 | `LED2` | Active-low LED output - mirrors red backplane LED |
 
 !!!warning "The LED1 and LED2 colours are unverified"
-    Which of the two carries green and which carries red has been questioned in [#42](https://github.com/elektricM/amd-bc250-docs/issues/42), and the assignment above has no source in this repo's history. Treat it as unconfirmed and check on your own board before wiring anything that depends on the colour. The active-low behaviour itself is not in doubt.
+    Which of the two carries green and which carries red has been questioned in [#42](https://github.com/elektricM/amd-bc250-docs/issues/42), and the assignment above has no source in this repo's history. The only readings so far, by @tfabris, are about 3 V on `LED1` and about 0 V on `LED2` while the backplane LED is red. For an active-low output that is what the table above predicts, since the lit colour is the pin pulled low, but it is not a confirmation: the green state, with an OS booted, has not been measured on any board yet. Check on your own board before wiring anything that depends on the colour. The active-low behaviour itself is not in doubt.
+
+!!!danger "Do not hang an LED directly on LED1 or LED2"
+    These are logic-level status outputs. Their driver circuit and current limit are not documented anywhere, and connecting a bare LED to `LED1` dimmed the red backplane LED to orange on the board in #42, which shows the external LED loading the same output. Buffer them: let the pin switch a small transistor or MOSFET, and run the front-panel LED with its series resistor from the 5 V or 12 V rail through that.
 
 Use both J2000 and J2001 for redundancy when powering from these connectors.
 
