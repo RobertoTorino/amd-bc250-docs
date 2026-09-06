@@ -564,17 +564,31 @@ zram-size = 4096  # 4GB instead of 8GB
 
 ### System "Freezes" When Sleeping
 
-**Symptoms**: Screen goes black, appears frozen, but power button wakes it
+**Symptoms**: Screen goes black when the box suspends and it does not come back. On some boards the power button wakes it; on others nothing does, the network is dead too, and only a power cut recovers it.
 
 **Quote**:
 > "Bazzite freezes when its about to sleep, had to hard reset everytime. That's interesting, mine 'freezes' when it sleeps, but hitting the power button wakes it up."
 
-**Explanation**: Board lacks proper sleep states, enters pseudo-sleep that looks like freeze
+**Explanation**: The BC-250 only offers `s2idle` (`cat /sys/power/mem_sleep` shows `[s2idle]` and no `deep`), and resume from it does not work reliably on this hardware. After a forced reboot, `journalctl -b -1 -n 5` ending in `PM: suspend entry (s2idle)` with no resume line after it confirms the box suspended and hung there.
 
-**Solutions**:
-1. Disable sleep/suspend in power settings
-2. Use "power button wakes" as intended behavior
-3. Configure screen blanking instead of system sleep
+**Fix: never let it suspend.** Turning off idle suspend in the desktop's power settings is the first step (GNOME: `gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'`), but on Bazzite it is not enough: Steam Game Mode has its own idle suspend, and Steam's power menu keeps a Sleep entry you cannot remove. Pick one of the two system-wide workarounds below. They are mutually exclusive, because both use the same path, `/etc/systemd/system/suspend.target`; remove one before applying the other.
+
+**Option A: make suspend do nothing.** Masking the sleep targets makes every suspend request fail immediately, whether it comes from the desktop, Game Mode or Steam's menu:
+
+```bash
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+```
+
+Revert with `sudo systemctl unmask` and the same four targets. Tested by @Weijtmans on Bazzite (Fedora Atomic 43), kernel 6.17.7-ba29 ([#55](https://github.com/elektricM/amd-bc250-docs/pull/55)).
+
+**Option B: turn Sleep into Shutdown.** If you keep hitting Sleep in Steam's power menu out of console muscle memory, retarget suspend at poweroff so the entry does something predictable instead of hanging the box:
+
+```bash
+sudo ln -sf /usr/lib/systemd/system/poweroff.target /etc/systemd/system/suspend.target
+sudo systemctl daemon-reload
+```
+
+Revert by deleting the symlink and running `daemon-reload` again. Contributed by @tfabris in [#59](https://github.com/elektricM/amd-bc250-docs/issues/59) and confirmed by a second user.
 
 ### Sleep State Power Issues
 
