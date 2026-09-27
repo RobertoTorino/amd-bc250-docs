@@ -270,9 +270,9 @@ Some active adapters overheat and fail.
 - Display goes black after a period of inactivity
 - No input wakes it: not mouse, keyboard or controller
 - The box is not reachable over the network either
-- Only a power cut recovers it
+- Only a power cut recovers it (on some boards the power button still wakes it)
 
-**Cause: the box suspended and never resumed.** The BC-250 only offers `s2idle` (`cat /sys/power/mem_sleep` shows `[s2idle]` with no `deep` state), and s2idle resume does not work on this hardware. The machine hangs in suspend, which is why no input does anything.
+**Cause: the box suspended and never resumed.** The BC-250 only offers `s2idle` (`cat /sys/power/mem_sleep` shows `[s2idle]` with no `deep` state), and resume from s2idle does not work reliably on this hardware. The machine hangs in suspend, which is why no input does anything.
 
 **Confirm it** after the forced reboot by looking at the end of the previous boot's journal:
 
