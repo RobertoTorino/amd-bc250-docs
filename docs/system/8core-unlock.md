@@ -153,7 +153,7 @@ Back up any existing `.aml` files **outside** `/etc/initcpio/acpi_override/` fir
 Check it worked:
 
 ```bash
-cpupower idle-info
+cpupower --cpu all idle-info --silent
 # every CPU, including 12-15, should now report C-states
 ```
 
