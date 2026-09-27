@@ -858,7 +858,7 @@ sudo rpm-ostree initramfs --enable
 sudo systemctl reboot
 ```
 
-After the reboot, `dmesg | grep SSDT` should report both tables found in the initrd, as shown on the CoreOS page.
+After the reboot, `sudo dmesg | grep SSDT` should report both tables found in the initrd, as shown on the CoreOS page. Plain `dmesg` is not permitted for regular users on Bazzite.
 
 **Step 3: Reboot and verify**
 
