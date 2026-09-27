@@ -690,6 +690,9 @@ sudo systemctl restart cyan-skillfish-governor-smu
 
 The [bc250_smu_oc](https://github.com/bc250-collective/bc250_smu_oc) tool overclocks the CPU via SMU commands. It raises the boost clock ceiling while keeping dynamic frequency scaling intact.
 
+!!!warning "Stop this governor while you tune"
+    Install `stress` first, and stop `cyan-skillfish-governor-smu` before running `bc250-detect` or a manual `bc250-apply`: the governor and these tools drive the same SMU registers. The [overclocking page](../bios/overclocking.md#cpu-overclocking-undervolting-smu-tool) explains why and lists the tool's limits and warnings.
+
 ### Installation
 
 ```bash

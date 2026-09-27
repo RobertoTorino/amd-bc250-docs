@@ -260,6 +260,10 @@ If you know two stable points, you can interpolate:
 
 **Note:** Voltage curves are NOT perfectly linear. Silicon lottery means every chip is different. Always test thoroughly.
 
+### CPU Undervolting
+
+Everything above is for the GPU. The CPU is undervolted through the SMU with `bc250-detect` from [bc250_smu_oc](https://github.com/bc250-collective/bc250_smu_oc). Its README gives `bc250-detect --frequency 3500 --vid 1000 --keep` to stay at the stock 3.5 GHz with a 1000 mV core voltage limit, against about 1180 mV stock at that clock. Installation, limits, and why the GPU governor must be stopped first are on the [overclocking page](../bios/overclocking.md#cpu-overclocking-undervolting-smu-tool).
+
 ---
 
 ## Idle Power Optimization
