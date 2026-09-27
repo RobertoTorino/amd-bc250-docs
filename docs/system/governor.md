@@ -203,7 +203,7 @@ See [github.com/filippor/cyan-skillfish-governor](https://github.com/filippor/cy
 
 **Example Configuration:**
 
-The `smu` branch uses a section-based TOML schema, not the older `safe-points = [...]` array. The block below is the shipped `default-config.toml` from the current `smu` branch, with every key annotated. **Your installed `/etc/cyan-skillfish-governor-smu/config.toml` is this file.** If it contains keys or values that an older guide or example did not mention, trust your file: it is the reference, and anything you have not consciously tuned is fine left at these defaults.
+The `smu` branch uses a section-based TOML schema, not the older `safe-points = [...]` array. The block below is the shipped `default-config.toml` from the current `smu` branch, with every key annotated. **A fresh COPR, `.deb` or release-tarball install puts this file at `/etc/cyan-skillfish-governor-smu/config.toml`.** Package upgrades keep an existing file (it is marked `noreplace`), so an older install can lack newer keys, which then take their built-in defaults, and `scripts/install.sh` run from a source checkout installs the repo's own `config.toml`, which has different values. Either way, if your file has keys or values that an older guide did not mention, trust your file over the guide, and anything you have not consciously tuned is fine left as it is.
 
 ```toml
 # Sampling and adjust periods, microseconds
@@ -219,7 +219,8 @@ fix-metrics = true
 # because sysfs frequency readings on this board are unreliable, especially
 # after the 8-core unlock. Off by default.
 fix-freq = false
-method = "busy-flag"   # "busy-flag", "process" or "kernel"
+method = "busy-flag"   # "busy-flag", "process" or "kernel" (needs a patched kernel)
+temp-read = "drm"      # "drm" or "sysfs", where the GPU temperature is read (v0.4.13+)
 flush-every = 10
 
 # Frequency/voltage backend
@@ -230,9 +231,10 @@ set-method = "smu"     # "smu" or "kernel"
 [dbus]
 enabled = true
 
-# Initial operating range at service start, MHz. Optional: omit a key or set
-# it to 0 for no limit. Both this range and later runtime range changes over
-# D-Bus are clamped inside the span of the [[safe-points]] curve below.
+# Initial operating range at service start, MHz. Optional: omit a key for no
+# limit. Do not set max = 0 here: it is clamped up to the lowest safe point
+# and holds the GPU there. The range is clamped inside the span of the
+# [[safe-points]] curve below; D-Bus range changes outside it are rejected.
 [frequency-range]
 min = 1000
 max = 1850
@@ -263,9 +265,10 @@ throttling_recovery = 75
 
 # Voltage curve. Each point is one [[safe-points]] table; the lowest and
 # highest frequencies on the curve are the hard limits of what the governor
-# will drive, and the voltage is what it applies at each step. These are the
-# shipped points. Your file does not need to match any guide's example; see
-# the tip below for raising the ceiling past 2000 MHz.
+# will drive, and between two points it interpolates the voltage linearly.
+# These are the shipped points; the shipped file also carries commented-out
+# points up to 2400 MHz. Your file does not need to match any guide's
+# example; see the tip below for raising the ceiling past 2000 MHz.
 [[safe-points]]
 frequency = 500    # MHz
 voltage = 700      # mV
