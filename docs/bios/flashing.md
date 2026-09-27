@@ -276,6 +276,8 @@ The board features a 2.54mm header specifically for flashing. This is safer than
     ```
     *   *If it detects "Winbond W25Q128..." or "Macronix MX25L128...":* **Success.** You are on the right chip.
     *   *If it detects "Macronix MX25L4005..." (512KB):* **STOP.** You are attached to the SuperIO chip. Move to the other chip.
+    *   *If it lists several Macronix names and stops with "Multiple flash chip definitions match the detected chip(s)":* the Macronix 128 Mbit parts share one ID, so flashrom cannot tell them apart and wants `-c`. Read the part number printed on the chip and pass the matching definition to every later command, for example `-c "MX25L12835F/MX25L12873F"`. @poltpolt wrote a 3.00 image successfully with `-c MX25L12805D` on a 3.3 V CH341A ([#69](https://github.com/elektricM/amd-bc250-docs/issues/69)).
+    *   *If the programmer reports overcurrent before it detects anything:* in-circuit, its 3.3 V pin most likely feeds more than the flash chip, so a programmer with a current limit can trip. @JustCryen's XGecu T76 tripped at its 120 mA default on a W25Q128JVSQ and worked at 250 mA ([#62](https://github.com/elektricM/amd-bc250-docs/issues/62)). Raise the limit in steps rather than switching the protection off.
 3.  **Backup (Essential):**
     ```bash
     sudo flashrom -p ch347_spi -r backup_stock.bin
