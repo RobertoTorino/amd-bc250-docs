@@ -309,6 +309,8 @@ Result: 60-70W idle possible
 
     Without the ACPI fix, `cpupower frequency-set` will not work.
 
+    On a board with the [8-core unlock](8core-unlock.md), use the 16-thread tables from [mendesrr/bc250-acpi-fix-updated-8c](https://github.com/mendesrr/bc250-acpi-fix-updated-8c) instead; the collective's tables cover only the first 12 threads.
+
 **Best Case Scenario:**
 
 User report: 55W idle on Debian with governor, undervolting, and proper kernel configuration.

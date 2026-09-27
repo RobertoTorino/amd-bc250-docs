@@ -745,6 +745,8 @@ The OC service raises the boost ceiling at boot. Combined with ACPI P-States and
 
 The [bc250-acpi-fix](https://github.com/bc250-collective/bc250-acpi-fix) provides SSDT tables that enable CPU C-States (idle sleep) and P-States (frequency scaling). Both are confirmed working on kernel 6.19.8.
 
+On a board with the [8-core unlock](8core-unlock.md), build the archive below from the 16-thread tables in [mendesrr/bc250-acpi-fix-updated-8c](https://github.com/mendesrr/bc250-acpi-fix-updated-8c) instead, since these cover only the first 12 threads.
+
 ### What It Enables
 
 - **C-States (SSDT-CST):** CPU cores enter C1/C2/C3 sleep states at idle, reducing power consumption
