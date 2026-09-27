@@ -71,7 +71,7 @@ yay -S cyan-skillfish-governor-smu
 ```
 
 **Debian/Ubuntu:**
-Upstream does not ship a `.deb`. Grab the latest `cyan-skillfish-governor-smu-*-x86_64-linux.tar.gz` from [filippor's releases](https://github.com/filippor/cyan-skillfish-governor/releases), extract it, and run `sudo ./scripts/install.sh`.
+Grab the latest `cyan-skillfish-governor-smu_*_amd64.deb` from [filippor's releases](https://github.com/filippor/cyan-skillfish-governor/releases) (shipped since v0.4.10) and install it with `sudo apt install ./cyan-skillfish-governor-smu_*_amd64.deb`, or extract the `cyan-skillfish-governor-smu-*-x86_64-linux.tar.gz` from the same page and run `sudo ./scripts/install.sh`.
 
 **Configuration:**
 
@@ -131,7 +131,7 @@ The BC-250 needs a kernel patch to unlock frequency range from 500-2500MHz (defa
 
 **Pre-patched Kernels:**
 
-**Bazzite:** Uses patched kernel by default (no action needed)
+**Bazzite:** Current Bazzite kernels do not carry the patch. Use the SMU governor instead, which does not need it (see [Bazzite Setup](../linux/bazzite.md#prebuilt-bc-250-images-optional)).
 
 **CachyOS:**
 ```bash

@@ -355,18 +355,18 @@ Reduce frequency or increase voltage in governor config.
 - Contains electronics/chip for signal conversion
 - Powered from DP port
 - Supports 4K60Hz, 4K120Hz
-- **Audio:** silent without the [DP audio clock fix](audio.md). The board's fault, not the adapter's
+- **Audio:** silent on kernels without the [DP audio clock fix](audio.md#which-kernels-are-affected). A kernel bug, not the adapter's fault
 - Cost: $15-30
 
 ### Known Issues with Active Adapters
 
-!!!info "The silence is the board's audio clock, not the adapter"
-    The BC-250's firmware programs the DisplayPort audio clock ~21% off, so every sample rate comes out ~17.65% slow. An active adapter is a real DisplayPort sink and receives that off-spec stream; most refuse to lock, which reads as "video works, audio doesn't". This was proven adapter-innocent: with an active adapter silent, a single register write restored audio instantly through that same adapter. See [DisplayPort Audio: Silence, Desync or Slow Pitch](audio.md) for the mechanism and the fix.
+!!!info "The silence is a kernel bug, not the adapter"
+    Kernels without the upstream fix program the DisplayPort audio clock ~21% off, so every sample rate comes out ~17.65% slow. An active adapter is a real DisplayPort sink and receives that off-spec stream; most refuse to lock, which reads as "video works, audio doesn't". This was proven adapter-innocent: with an active adapter silent, a single register write restored audio instantly through that same adapter. Kernel 7.2 and newer fix it completely, and current longterm kernels fix the large error. See [DisplayPort Audio: Silence, Desync or Slow Pitch](audio.md) for which kernels are affected, the mechanism and a workaround for older ones.
 
-**Why passive adapters seem immune:** the driver treats a passive DP++ dongle as an HDMI sink and clocks audio from the pixel clock instead of the broken DisplayPort reference clock. A native DP monitor takes the same affected path as an active adapter, but usually plays the stream anyway, just slow and drifting.
+**Why passive adapters seem immune:** the driver treats a passive DP++ dongle as an HDMI sink and clocks audio from the pixel clock instead of the affected DisplayPort audio clock. A native DP monitor takes the same affected path as an active adapter, but usually plays the stream anyway, just slow and drifting.
 
 **Workarounds:**
-1. Apply the [DP audio clock fix](audio.md), which keeps the active adapter and its capabilities (4K60+, CEC)
+1. Update to a kernel with the [DP audio clock fix](audio.md#which-kernels-are-affected), which keeps the active adapter and its capabilities (4K60+, CEC)
 2. Use passive adapter (unaffected path, if its resolution limits suit you)
 3. Use USB DAC for audio
 
@@ -378,7 +378,7 @@ Reduce frequency or increase voltage in governor config.
 - Most cheap unbranded passive adapters
 
 **Active adapters:**
-- "4K120"/"8K"-branded adapters are active adapters: fine for video, but expect no audio until the [DP audio clock fix](audio.md) is applied (a UGREEN 8K unit is verified working with it, including CEC)
+- "4K120"/"8K"-branded adapters are active adapters: fine for video, and fine for audio on a kernel with the [DP audio clock fix](audio.md) (a UGREEN 8K unit is verified working, including CEC); on older kernels expect no audio
 - USB power ports or status LEDs usually indicate an active adapter
 
 ---

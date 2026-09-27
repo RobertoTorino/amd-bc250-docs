@@ -48,7 +48,7 @@ The GPU governor is essential for BC-250 performance, enabling dynamic frequency
 - Multiple frequency steps with thermal throttling
 - Maintains GPU usage in optimal range
 - Available as COPR/RPM and AUR
-- Requires kernel frequency range patch (pre-included in Bazzite)
+- Requires kernel frequency range patch (not in current Bazzite kernels, see [Bazzite Setup](../linux/bazzite.md#prebuilt-bc-250-images-optional))
 
 **COPR:** `filippor/bazzite`
 **Repository:** [github.com/filippor/cyan-skillfish-governor](https://github.com/filippor/cyan-skillfish-governor)
@@ -172,9 +172,16 @@ sudo systemctl enable --now cyan-skillfish-governor-tt.service
 !!!info "COPR Package Status"
     The `filippor/bazzite` COPR provides both `cyan-skillfish-governor-smu` (recommended) and `cyan-skillfish-governor-tt` (alternative). Confirmed working as of Mar 2026.
 
-### Option 2: Debian/Ubuntu/Generic Linux (release tarball)
+### Option 2: Debian/Ubuntu/Generic Linux (.deb or release tarball)
 
-Upstream does not ship a `.deb`. Use the release tarball from [filippor's releases page](https://github.com/filippor/cyan-skillfish-governor/releases):
+Since v0.4.10, every release on [filippor's releases page](https://github.com/filippor/cyan-skillfish-governor/releases) carries a `.deb`, built with cargo-deb, next to the tarball. On Debian and Ubuntu, install that:
+
+```bash
+# Grab the latest cyan-skillfish-governor-smu_*_amd64.deb, then:
+sudo apt install ./cyan-skillfish-governor-smu_*_amd64.deb   # also enables and starts the service
+```
+
+On other distributions, use the release tarball:
 
 ```bash
 # Grab the latest cyan-skillfish-governor-smu-*-x86_64-linux.tar.gz, then:
@@ -615,8 +622,8 @@ sudo journalctl -u cyan-skillfish-governor-smu -f
 ### When to Use Cyan-Skillfish TT
 
 - **Multi-step scaling:** Thermal throttling awareness
-- **Available as package:** Easy to install on Bazzite (kernel pre-patched)
-- **Best for:** Bazzite users who already have the kernel patch
+- **Available as package:** COPR and AUR
+- **Best for:** Kernels that carry the frequency range patch; current Bazzite kernels do not
 
 ### When to Use Oberon (Legacy)
 
@@ -690,6 +697,9 @@ sudo systemctl restart cyan-skillfish-governor-smu
 
 The [bc250_smu_oc](https://github.com/bc250-collective/bc250_smu_oc) tool overclocks the CPU via SMU commands. It raises the boost clock ceiling while keeping dynamic frequency scaling intact.
 
+!!!warning "Stop this governor while you tune"
+    Install `stress` first, and stop `cyan-skillfish-governor-smu` before running `bc250-detect` or a manual `bc250-apply`: the governor and these tools drive the same SMU registers. The [overclocking page](../bios/overclocking.md#cpu-overclocking-undervolting-smu-tool) explains why and lists the tool's limits and warnings.
+
 ### Installation
 
 ```bash
@@ -741,6 +751,8 @@ The OC service raises the boost ceiling at boot. Combined with ACPI P-States and
 ## ACPI Fix Installation
 
 The [bc250-acpi-fix](https://github.com/bc250-collective/bc250-acpi-fix) provides SSDT tables that enable CPU C-States (idle sleep) and P-States (frequency scaling). Both are confirmed working on kernel 6.19.8.
+
+On a board with the [8-core unlock](8core-unlock.md), build the archive below from the 16-thread tables in [mendesrr/bc250-acpi-fix-updated-8c](https://github.com/mendesrr/bc250-acpi-fix-updated-8c) instead, since these cover only the first 12 threads.
 
 ### What It Enables
 
