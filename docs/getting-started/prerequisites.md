@@ -75,6 +75,7 @@ The board has NATIVE DisplayPort output.
 - **Best:** Native DisplayPort cable (1080p/1440p/4K, audio works)
 - **Good:** Passive DP to HDMI adapter (1080p/1440p, audio works)
 - **Avoid:** Active DP to HDMI adapter (video works, audio broken)
+- Modern Smart TVs and projectors may not support the BIOS display resolution leading to what looks like a blank screen on your first start-up. If your display does not wake when num-lock or scroll-lock trigger on the keyboard, try a PC monitor.
 
 !!!info "Audio Limitation"
     Native DP audio is partially broken in Linux. Use passive adapters for best results, or USB audio as workaround.
