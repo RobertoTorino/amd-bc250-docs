@@ -491,7 +491,7 @@ voltage = 1035
 **Which to Choose:**
 
 - **Cyan Skillfish SMU**: Recommended default — no kernel patches needed, bypasses kernel frequency/voltage limits via SMU firmware
-- **Cyan Skillfish TT**: Alternative — thermal throttling support, requires kernel patch (pre-included in Bazzite)
+- **Cyan Skillfish TT**: Alternative — thermal throttling support, requires the kernel frequency range patch (not in current Bazzite kernels)
 - **Oberon**: Legacy option — migrate to SMU
 
 ---

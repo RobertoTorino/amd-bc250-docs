@@ -341,16 +341,15 @@ sudo pacman -S linux  # check version is 6.17.11+ or 6.18.x
 **Purpose:** Enables extended frequency range (350 MHz - 2230 MHz) instead of default (1000-2000 MHz)
 
 **Distributions with Patch Included:**
-- Bazzite (pre-applied — **no manual patching needed**)
 - PikaOS (pre-applied)
 
-!!!success "Bazzite Users: Patch Already Included"
-    If you're running Bazzite, the GPU frequency range patch is **already included in Bazzite's kernel**. You do NOT need to manually patch anything. Just install a governor and you're done.
+!!!warning "Current Bazzite kernels do not include it"
+    This page used to list Bazzite here. Since stable `44.20260429` Bazzite ships the Open Gaming Collective kernel, which keeps the stock 1000-2000 MHz limits (checked at `v7.2.4-ogc3` and `v7.2.7-ogc1`). On Bazzite, use the SMU governor below; see [Bazzite Setup](bazzite.md#prebuilt-bc-250-images-optional).
 
 !!!info "SMU Governor Bypasses Kernel Patching"
     The `cyan-skillfish-governor-smu` manages clock speeds through SMU firmware calls and **does not require the kernel frequency range patch on ANY distro**. This is the easiest option for CachyOS, Arch, Fedora, or Debian users who don't want to compile a custom kernel. Install via AUR (`cyan-skillfish-governor-smu`) or COPR (`filippor/bazzite`).
 
-**Manual Patching (only if not using Bazzite/PikaOS and not using SMU governor):**
+**Manual Patching (only if not using PikaOS and not using SMU governor):**
 
 Required for:
 - Fedora (with TT governor)
@@ -366,7 +365,7 @@ Required for:
 
 [Detailed patching guide available in community resources]
 
-**Alternative:** Use distributions with patch pre-applied (Bazzite, PikaOS) or use the SMU governor
+**Alternative:** Use a distribution with the patch pre-applied (PikaOS) or use the SMU governor
 
 ### 40 CU Unlock Patch (Experimental)
 

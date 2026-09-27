@@ -68,13 +68,12 @@ Several community projects bundle the common post-install steps (governor, overc
 **Status:** Steam Deck-like experience, works OOTB
 - **Base:** Fedora Atomic (immutable)
 - **Desktop:** Deck UI or Desktop Mode (GNOME/KDE)
-- **Kernel:** Custom kernel with BC-250 patches included
+- **Kernel:** Bazzite's own kernel (stock BC-250 clock limits; use the SMU governor)
 - **Mesa:** 25.1+ out-of-box
 
 ### Pros
 
 - Works out-of-box with latest ISO
-- Includes GPU frequency patch natively (up to 2230MHz)
 - Immutable system (harder to break)
 - Governor installation script available
 - Steam Deck UI for couch gaming

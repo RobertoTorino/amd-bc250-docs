@@ -48,7 +48,7 @@ The GPU governor is essential for BC-250 performance, enabling dynamic frequency
 - Multiple frequency steps with thermal throttling
 - Maintains GPU usage in optimal range
 - Available as COPR/RPM and AUR
-- Requires kernel frequency range patch (pre-included in Bazzite)
+- Requires kernel frequency range patch (not in current Bazzite kernels, see [Bazzite Setup](../linux/bazzite.md#prebuilt-bc-250-images-optional))
 
 **COPR:** `filippor/bazzite`
 **Repository:** [github.com/filippor/cyan-skillfish-governor](https://github.com/filippor/cyan-skillfish-governor)
@@ -615,8 +615,8 @@ sudo journalctl -u cyan-skillfish-governor-smu -f
 ### When to Use Cyan-Skillfish TT
 
 - **Multi-step scaling:** Thermal throttling awareness
-- **Available as package:** Easy to install on Bazzite (kernel pre-patched)
-- **Best for:** Bazzite users who already have the kernel patch
+- **Available as package:** COPR and AUR
+- **Best for:** Kernels that carry the frequency range patch; current Bazzite kernels do not
 
 ### When to Use Oberon (Legacy)
 

@@ -131,7 +131,7 @@ The BC-250 needs a kernel patch to unlock frequency range from 500-2500MHz (defa
 
 **Pre-patched Kernels:**
 
-**Bazzite:** Uses patched kernel by default (no action needed)
+**Bazzite:** Current Bazzite kernels do not carry the patch. Use the SMU governor instead, which does not need it (see [Bazzite Setup](../linux/bazzite.md#prebuilt-bc-250-images-optional)).
 
 **CachyOS:**
 ```bash
