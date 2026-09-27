@@ -200,7 +200,7 @@ Once the flashing process finishes and the system attempts to reboot:
 1.  Power on and spam **Del** to enter BIOS.
 2.  Verify CMOS was cleared. The time/clock should be wrong. If not repeat Step 6 (The Critical CMOS Clear).
 3.  Navigate to: **Chipset** → **GFX Configuration**.
-4.  Set **Integrated Graphics Controller** to **Forces**.
+4.  Set **Integrated Graphics Controller** to **Forced**.
 5.  Set **UMA Mode** to **UMA_SPECIFIED**.
 6.  Set **UMA Frame Buffer Size** to **512MB** (Recommended) or your preferred fixed size.
 7.  Navigate to: **Advanced** → **CPU Configuration**.
@@ -293,7 +293,7 @@ The board features a 2.54mm header specifically for flashing. This is safer than
 ### 4. Post-Flash Configuration
 
 1.  Enter BIOS → **Chipset** → **GFX Configuration**.
-2.  Set **Integrated Graphics Controller** to **Forces**.
+2.  Set **Integrated Graphics Controller** to **Forced**.
 3.  Set **UMA Mode** to **UMA_SPECIFIED**.
 4.  Set **UMA Frame Buffer Size** to **512M**.
 5.  Navigate to: **Advanced** → **CPU Configuration**.
