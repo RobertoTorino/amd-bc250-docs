@@ -587,7 +587,7 @@ zram-size = 4096  # 4GB instead of 8GB
 **Quote**:
 > "Bazzite freezes when its about to sleep, had to hard reset everytime. That's interesting, mine 'freezes' when it sleeps, but hitting the power button wakes it up."
 
-**Explanation**: The BC-250 only offers `s2idle` (`cat /sys/power/mem_sleep` shows `[s2idle]` and no `deep`), and resume from it does not work reliably on this hardware. After a forced reboot, `journalctl -b -1 -n 5` ending in `PM: suspend entry (s2idle)` with no resume line after it confirms the box suspended and hung there.
+**Explanation**: The BC-250 only offers `s2idle` (`cat /sys/power/mem_sleep` shows `[s2idle]` and no `deep`), and resume from it does not work reliably on this hardware. After a forced reboot, `journalctl -b -1 -n 5` ending in `PM: suspend entry (s2idle)` with no resume line after it confirms the box suspended and hung there. The [display page](display.md#problem-black-screen-after-idle-nothing-wakes-it) has the same diagnosis from the black-screen angle.
 
 **Fix: never let it suspend.** Turning off idle suspend in the desktop's power settings is the first step (GNOME: `gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'`), but on Bazzite it is not enough: Steam Game Mode has its own idle suspend, and Steam's power menu keeps a Sleep entry you cannot remove. Pick one of the two system-wide workarounds below. They are mutually exclusive, because both use the same path, `/etc/systemd/system/suspend.target`; remove one before applying the other.
 

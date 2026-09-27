@@ -295,6 +295,8 @@ sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.ta
 
 Revert with `sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target` if resume ever starts working on this hardware.
 
+The same fix, plus a second workaround that turns Sleep into Shutdown, is on the [stability page](stability.md#system-freezes-when-sleeping).
+
 Tested by: @Weijtmans. BC-250, Bazzite (Fedora Atomic 43), kernel 6.17.7-ba29.
 
 ---
