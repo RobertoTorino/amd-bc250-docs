@@ -455,10 +455,11 @@ zram-size = 4096  # 4GB instead of 8GB
    - Issue: Some games work better at 44.1kHz vs 48kHz
    - Quote: "I changed alsa and pulseaudio settings to make the sample rate 44.1khz rather than 48khz and all of a sudden sound worked fine - it wasn't choppy anymore - but all audio was pitched down"
    - Recommendation: Keep at 48kHz unless specific game requires change
+   - If DisplayPort audio is pitched down at every sample rate, that is the [DP audio clock bug](audio.md), fixed by a kernel update
 
 2. **Use correct audio output**
    - Passive DisplayPort to HDMI: Audio works
-   - Active DP to HDMI adapters: Audio often broken
+   - Native DP and active DP to HDMI adapters: silent or pitched down on older kernels, fixed by a kernel update ([details](audio.md))
    - USB audio: Most reliable for quality audio
 
 3. **Audio-related performance issues**

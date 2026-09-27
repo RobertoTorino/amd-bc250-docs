@@ -379,13 +379,13 @@ sensors
 
 ### Audio Issues
 
-**Symptom:** Pitched down audio, slowed video playback
+**Symptom:** Pitched down or silent audio over DisplayPort, slowed video playback
 
-**Cause:** BC-250 DisplayPort audio implementation
+**Cause:** a kernel bug in the DisplayPort audio clock for this chip, fixed upstream
 
 **Solution:**
-- Use passive DP-to-HDMI adapter
-- Or use USB audio adapter
+- Update the kernel. Kernels 6.12.78 and newer (Debian 13's own kernel once fully updated), 6.18.20 and newer and all 7.x fix the large error; 7.2 also removes a small remaining drift. Details and the kernel table are on the [DisplayPort audio page](../troubleshooting/audio.md)
+- Or use a passive DP-to-HDMI adapter or a USB audio adapter
 
 ---
 

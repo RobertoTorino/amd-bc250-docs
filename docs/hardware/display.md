@@ -66,15 +66,15 @@ aplay -l
 - **Note:** DP 1.2 max (1440p @60Hz, some support 1440p @165Hz)
 
 **Active Adapters:**
-- **Audio:** Silent out of the box on many setups. Caused by the board's DisplayPort audio clock, not the adapter, and works with the [DP audio clock fix](../troubleshooting/audio.md)
+- **Audio:** Silent or slow on older kernels. Caused by a kernel bug in the DisplayPort audio clock, not by the adapter, and fixed by a [kernel update](../troubleshooting/audio.md#which-kernels-are-affected)
 - **Cost:** More expensive ($15-30)
 - **Use Case:** 4K @60Hz+ on HDMI displays, HDMI-CEC
-- **Issues:** Apply the audio fix before writing the adapter off
+- **Issues:** Check your kernel against the audio page before writing the adapter off
 
 ### Known Issues with Adapters
 
 !!!info "The adapters were never the problem"
-    The "adapters break audio" reports trace back to a bug on the board itself: the firmware programs the DisplayPort audio clock for a reference clock the hardware does not have. Active adapters are real DisplayPort sinks, so they receive that off-spec audio stream and often refuse to lock (silence). Passive adapters make the driver use a different, unaffected clock path, which is why they seem immune. See [DisplayPort Audio: Silence, Desync or Slow Pitch](../troubleshooting/audio.md) for the mechanism and a fix that needs no kernel build.
+    The "adapters break audio" reports trace back to a kernel bug: older kernels program the DisplayPort audio clock for a reference clock the hardware does not have. Active adapters are real DisplayPort sinks, so they receive that off-spec audio stream and often refuse to lock (silence). Passive adapters make the driver use a different, unaffected clock path, which is why they seem immune. Kernel 7.2 and newer fix it completely, and current longterm kernels fix the large error. See [DisplayPort Audio: Silence, Desync or Slow Pitch](../troubleshooting/audio.md) for which kernels are affected, the mechanism and a workaround for older ones.
 
 **Common Symptoms:**
 - Display works, no audio (active adapters: the sink refuses the off-spec stream)
@@ -82,7 +82,7 @@ aplay -l
 - Audio dropouts/clicking
 
 **Workarounds:**
-1. Apply the [DP audio clock fix](../troubleshooting/audio.md), which fixes audio through the adapter you already have
+1. Update to a kernel with the [DP audio clock fix](../troubleshooting/audio.md#which-kernels-are-affected), which fixes audio through the adapter you already have (the audio page also has a workaround for older kernels)
 2. Use a passive adapter (unaffected clock path, but 1080p/1440p limits and no CEC)
 3. Use USB audio adapter/DAC
 4. Use Bluetooth audio
@@ -345,7 +345,7 @@ HDR support in Linux is improving but still experimental:
 
 ## Audio Solutions
 
-Audio through DP-HDMI adapters is fixable in software, see the [DP audio clock fix](../troubleshooting/audio.md). If you'd rather not run that, here are alternative solutions:
+Audio through DP-HDMI adapters works on a current kernel, see [DisplayPort Audio](../troubleshooting/audio.md). If you are stuck on an older kernel or want a separate audio output anyway, here are alternative solutions:
 
 ### Option 1: USB Audio Adapter
 
@@ -447,7 +447,7 @@ If your monitor has DisplayPort input AND built-in speakers:
 ### TV Connection (Living Room Gaming)
 - **Display:** 4K TV with HDMI 2.0+
 - **Adapter:** Active DP to HDMI 2.0 adapter
-- **Audio:** TV speakers / soundbar over the adapter works with the [DP audio clock fix](../troubleshooting/audio.md); Bluetooth/USB audio as fallback
+- **Audio:** TV speakers / soundbar over the adapter works on a kernel with the [DP audio clock fix](../troubleshooting/audio.md); Bluetooth/USB audio as fallback
 - **Note:** Test adapter audio before permanent setup
 
 ## See Also

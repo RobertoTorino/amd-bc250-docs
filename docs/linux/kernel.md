@@ -31,6 +31,9 @@ The Linux kernel version and configuration is critical for BC-250 stability and 
 !!!success "Current Recommendation"
     Use kernel **6.18.18 LTS** or **6.19.x stable** for the best BC-250 experience. Both work well. Kernels **6.17.11+** are also fine.
 
+!!!info "DisplayPort audio depends on the kernel too"
+    DisplayPort audio plays about 18% slow or not at all on kernels older than 6.12.78, 6.18.20, 6.19.10 or 7.0, including every 6.13 to 6.17 release, and drifts slightly out of sync until 7.1.10 or 7.2. See the [DisplayPort audio page](../troubleshooting/audio.md#which-kernels-are-affected).
+
 !!!warning "7.0-rc: Mainline — Do Not Use in Production"
     Kernel 7.0-rc4 is the current mainline release candidate. Not tested on BC-250 and not recommended for daily use.
 
