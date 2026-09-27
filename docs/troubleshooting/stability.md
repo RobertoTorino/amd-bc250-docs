@@ -217,9 +217,26 @@ Before diving into specific issues, check these common causes:
 
 ### Overheating Auto-Shutoff
 
-**Symptoms**: System powers off cleanly when temperature exceeds threshold
+**Symptoms**: The board cuts power by itself, with no shutdown from the OS. If it happens a roughly fixed time after power-on, and sooner when you switch it straight back on, the chip is still hot from the previous attempt and a thermal trip is the most likely cause.
 
-**Solution**: This is actually protective behavior - improve cooling rather than disabling
+This is protective behaviour. Fix the cooling rather than looking for a setting that disables it.
+
+**Shuts off seconds after power-on, right after heatsink work**
+
+When this starts right after a repaste, a pad change or fin work, the usual cause is that the heatsink no longer sits properly on the APU die. With the heatsink off, check:
+
+1. **Pad thickness under the heatsink.** Replace the pads between the board and the heatsink with the same thickness as the ones you took off. A pad thicker than the gap holds the heatsink off the die. One community report puts the heatsink-side pads at 1.5 mm and the underside ones at 2 mm (Discord, September 2025); measure your own old pads rather than relying on that.
+2. **Paste imprint.** Apply paste, mount the heatsink, take it off again and look at the die. No imprint, or one that does not cover the die, means no contact.
+3. **Thermal putty.** Community reports mention putty on some of the small components under the heatsink as well as pads. Put the same amount back where it was; missing or stacked material changes the height too.
+4. **Screw pressure.** Tighten the four heatsink screws evenly in an X pattern, without cranking them down.
+5. **Fan.** Confirm the fan actually spins during those seconds. The stock heatsink is passive and needs airflow ([Cooling Solutions](../hardware/cooling.md)).
+6. **Debris.** If you opened up or removed fins, check the board for aluminium fragments before powering it again.
+
+Let the board cool down completely between attempts, and keep each test short.
+
+Missing pads on the underside memory are worth fixing as well, but the memory symptoms on the cooling page show up after 30 to 60 minutes of load, not seconds after power-on. See [Thermal Paste Replacement](../hardware/cooling.md#thermal-paste-replacement) and [Memory Thermal Pad Replacement](../hardware/cooling.md#memory-thermal-pad-replacement).
+
+If it still shuts off on a schedule with the heatsink confirmed seated and the fan running, look at power delivery next: [Power Supply Issues](#power-supply-issues).
 
 ---
 
