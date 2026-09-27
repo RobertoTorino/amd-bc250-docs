@@ -94,11 +94,11 @@ aplay -l
 | UGREEN 8K Active (Realtek RTD2173) | Yes | Yes, with the [DP audio clock fix](../troubleshooting/audio.md) | Silent without the fix. Verified at 4K60 and 1080p120; HDMI-CEC works. Tested by @Weijtmans |
 | Generic Passive | Usually | Sometimes | Hit or miss |
 | Cable Matters Active | Yes | No | 4K works, no audio |
-| Club3D Active | Yes | Sometimes | Sporadic audio issues |
+| Club3D Active | Yes | Yes, with the [DP audio clock fix](../troubleshooting/audio.md) | Silent without the fix. Verified at 4K120. Tested by @GabMus |
 | StarTech Active | Yes | No | Reliable display, no audio |
 
 !!!note "The 'No audio' rows predate the root cause discovery"
-    The Cable Matters/Club3D/StarTech results were collected before the [DP audio clock bug](../troubleshooting/audio.md) was identified. The mechanism predicts they fail for the same reason and would work with the fix, but that has not been re-tested. If you own one, re-test with the fix applied and report back.
+    The Cable Matters/StarTech results were collected before the [DP audio clock bug](../troubleshooting/audio.md) was identified. The mechanism predicts they fail for the same reason and would work with the fix, but that has not been re-tested. If you own one, re-test with the fix applied and report back.
 
 ## Common Display Problems
 
