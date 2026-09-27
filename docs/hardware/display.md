@@ -232,16 +232,18 @@ The BC-250 can join an HDMI-CEC bus (TV power on/off, input switching, TV-remote
 
 **Verified working:** UGREEN 8K active DP-HDMI adapter (Realtek RTD2173). `/dev/cec0` appears, the board registers as a CEC 2.0 Playback Device (logical address 8), and traffic is bidirectional: the TV answers a power-status query in 87 ms and an OSD-name query in 29 ms. Tested by @Weijtmans on Bazzite (Fedora Atomic 43), kernel 6.17.7-ba29, Samsung TV.
 
-!!!note "The kernel's CEC adapter list is not a compatibility matrix"
-    The kernel documentation names a few known CEC-tunnelling chipsets (Parade PS175/PS176/PS186, MegaChips 2900, some Club3D models). That list is one maintainer's observations; the RTD2173 is not on it and works fine. Don't rule an adapter out because its chipset isn't listed; check for `/dev/cec0`.
+!!!note "The kernel's CEC adapter list is not a compatibility matrix, and neither is /dev/cec0"
+    The kernel documentation lists the adapters its CEC maintainer has seen work (Parade PS175/PS176/PS186 and MegaChips 2900 chipsets, a few Club3D, CableCreation and HP models). It is a list of observations: the RTD2173 is not on it and works. The same documentation also warns that many adapters with a tunnelling-capable chip never connect the CEC pin, and on those `/dev/cec0` still appears but never sees the TV. So do not rule an adapter out because it is not listed, and do not rule it in because `/dev/cec0` exists: the test is whether the TV answers, see the quick start below.
 
-**Passive adapters physically cannot do CEC.** CEC tunnelling lives in a DPCD register block (0x3000) that only a real DP sink implements. You can verify your adapter's support directly:
+**Passive adapters cannot do CEC**; the kernel documentation says so too. Tunnelling is advertised in a DPCD register (0x3000) that only a real DP sink such as an active adapter implements, and the kernel creates `/dev/cec0` only when bit 0 of it is set. You can read it directly:
 
 ```bash
 sudo dd if=/dev/drm_dp_aux0 bs=1 skip=$((0x3000)) count=1 2>/dev/null | xxd
-# Output = CEC-capable (DPCD CEC block present)
-# No output = no CEC tunnelling (all passive adapters, many active ones)
+# 01, 03, 05 or 07 (bit 0 set) = the adapter advertises CEC tunnelling
+# 00, or no output = no tunnelling (a passive adapter gives no output)
 ```
+
+Advertising tunnelling is necessary, not sufficient; see the note above.
 
 **Quick start** (`cec-ctl` is in `v4l-utils`):
 
@@ -252,6 +254,8 @@ ls /dev/cec*
 cec-ctl -d /dev/cec0 --playback   # register as a Playback device on the bus
 cec-ctl -d /dev/cec0 -S           # scan: shows the TV, audio system, other devices
 ```
+
+The scan must list at least one device besides the BC-250 itself. If it shows only the BC-250, either the adapter does not connect the CEC pin or CEC is switched off for that input on the TV.
 
 `/dev/cec0` is owned `root:video`, so add your user to the `video` group for non-root use, and remember group changes only apply to new logins.
 
