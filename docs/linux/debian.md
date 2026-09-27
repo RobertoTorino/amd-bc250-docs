@@ -203,9 +203,16 @@ Remove `nomodeset` if you added it during installation (after Mesa is installed)
 
 A GPU governor is required for proper GPU frequency scaling.
 
-**Option 1: Install cyan-skillfish-governor-smu from release tarball (recommended)**
+**Option 1: Install cyan-skillfish-governor-smu from filippor's releases (recommended)**
 
-Upstream does not ship a `.deb`. The SMU governor is distributed as a release tarball from [filippor's releases](https://github.com/filippor/cyan-skillfish-governor/releases). It bypasses kernel patching entirely.
+The SMU governor is distributed on [filippor's releases](https://github.com/filippor/cyan-skillfish-governor/releases) page, as a `.deb` since v0.4.10 and as a release tarball. It bypasses kernel patching entirely.
+
+```bash
+# Grab the latest cyan-skillfish-governor-smu_*_amd64.deb from the releases page, then:
+sudo apt install ./cyan-skillfish-governor-smu_*_amd64.deb   # also enables and starts the service
+```
+
+Or, with the tarball:
 
 ```bash
 # Grab the latest cyan-skillfish-governor-smu-*-x86_64-linux.tar.gz from the releases page, then:

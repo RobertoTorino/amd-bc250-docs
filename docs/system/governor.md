@@ -172,9 +172,16 @@ sudo systemctl enable --now cyan-skillfish-governor-tt.service
 !!!info "COPR Package Status"
     The `filippor/bazzite` COPR provides both `cyan-skillfish-governor-smu` (recommended) and `cyan-skillfish-governor-tt` (alternative). Confirmed working as of Mar 2026.
 
-### Option 2: Debian/Ubuntu/Generic Linux (release tarball)
+### Option 2: Debian/Ubuntu/Generic Linux (.deb or release tarball)
 
-Upstream does not ship a `.deb`. Use the release tarball from [filippor's releases page](https://github.com/filippor/cyan-skillfish-governor/releases):
+Since v0.4.10, every release on [filippor's releases page](https://github.com/filippor/cyan-skillfish-governor/releases) carries a `.deb`, built with cargo-deb, next to the tarball. On Debian and Ubuntu, install that:
+
+```bash
+# Grab the latest cyan-skillfish-governor-smu_*_amd64.deb, then:
+sudo apt install ./cyan-skillfish-governor-smu_*_amd64.deb   # also enables and starts the service
+```
+
+On other distributions, use the release tarball:
 
 ```bash
 # Grab the latest cyan-skillfish-governor-smu-*-x86_64-linux.tar.gz, then:
