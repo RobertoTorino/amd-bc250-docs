@@ -98,7 +98,7 @@ aplay -l
 | StarTech Active | Yes | No | Reliable display, no audio |
 
 !!!note "The 'No audio' rows predate the root cause discovery"
-    The Cable Matters/StarTech results were collected before the [DP audio clock bug](../troubleshooting/audio.md) was identified. The mechanism predicts they fail for the same reason and would work with the fix, but that has not been re-tested. If you own one, re-test with the fix applied and report back.
+    The Cable Matters/StarTech results were collected before the [DP audio clock bug](../troubleshooting/audio.md) was identified. The mechanism predicts they fail for the same reason and work on a kernel with the fix, but that has not been re-tested. If you own one, re-test on a current kernel and report back with the output of `uname -r`.
 
 ## Common Display Problems
 
