@@ -148,7 +148,7 @@ sudo nano /etc/update-extlinux.conf
 Use a performance-oriented default line such as:
 
 ```bash
-default_kernel_opts="quiet amdgpu.sg_display=0 mitigations=off"
+default_kernel_opts="quiet mitigations=off"
 ```
 
 Then rebuild boot files:
@@ -170,7 +170,7 @@ sudo nano /etc/default/grub
 Use:
 
 ```bash
-GRUB_CMDLINE_LINUX_DEFAULT="quiet amdgpu.sg_display=0 mitigations=off"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet mitigations=off"
 ```
 
 Then rebuild boot files:

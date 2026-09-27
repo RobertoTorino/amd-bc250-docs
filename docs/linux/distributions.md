@@ -275,9 +275,9 @@ pacman -S base-devel cmake git mesa vulkan-radeon
 # Install graphics stack and firmware
 sudo apk add linux-lts linux-firmware-amdgpu mesa-dri-gallium mesa-vulkan-ati mesa-gl
 
-# Add BC-250-safe kernel parameter
+# Optional: turn off CPU mitigations (Alpine kernels are 6.12+, so amdgpu.sg_display=0 is not needed)
 # /etc/update-extlinux.conf
-default_kernel_opts="quiet amdgpu.sg_display=0 mitigations=off"
+default_kernel_opts="quiet mitigations=off"
 
 sudo update-extlinux
 ```
