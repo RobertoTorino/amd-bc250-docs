@@ -2459,7 +2459,7 @@
       "discord": "https://discord.com/channels/1315924807128449065/1500957766444122134"
     },
     "printables_id": null,
-    "makerworld_id": 2749412,
+    "makerworld_id": "2749412",
     "thumbnail": "https://makerworld.bblmw.com/makerworld/model/US2bc9f72e5725b7/design/2826b7069996d788.jpg?x-oss-process=image/resize,w_1000/format,webp",
     "is_remix": false
   },
@@ -2477,7 +2477,7 @@
       "discord": "https://discord.com/channels/1315924807128449065/1500957766444122134"
     },
     "printables_id": null,
-    "makerworld_id": 2916696,
+    "makerworld_id": "2916696",
     "thumbnail": "https://makerworld.bblmw.com/makerworld/model/US40f4dcee0a28d2/design/41e2856a0abafc2d.jpg?x-oss-process=image/resize,w_1000/format,webp",
     "is_remix": false
   },
@@ -2495,8 +2495,8 @@
       "printables": "https://www.printables.com/model/1835961-bc250-case-mkuu-fsp-apevia-metalfish-psu",
       "discord": "https://discord.com/channels/1315924807128449065/1546624878512312470"
     },
-    "printables_id": 1835961,
-    "makerworld_id": 3021754,
+    "printables_id": "1835961",
+    "makerworld_id": "3021754",
     "thumbnail": "https://makerworld.bblmw.com/makerworld/model/USb3004f964d1b81/design/7660006e5f95fde0.png?x-oss-process=image%2Fformat%2Cwebp",
     "is_remix": true
   }
