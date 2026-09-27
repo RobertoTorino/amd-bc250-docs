@@ -5,6 +5,9 @@ The BC-250 ships with 24 of 40 RDNA2 Compute Units active. The remaining 16 CUs 
 !!!success "Credits"
     All of this work is by **[duggasco](https://github.com/duggasco)** and contributors. The kernel patch, helper scripts, methodology, controlled A/B testing, and academic writeup all live at **[duggasco/bc250-40cu-unlock](https://github.com/duggasco/bc250-40cu-unlock)**. If you find this useful, star their repo. This page summarises and adds distro-specific notes and field-verified thermal data.
 
+!!!note "The upstream repo is archived"
+    duggasco archived the repository on 17 September 2026. It still clones and the scripts, patch and reports are all still there, but it is read-only now: nothing in it will be updated if a later kernel breaks the patch or the build scripts. [Option 4](#option-4-runtime-umr-no-kernel-rebuild), the runtime UMR route, does not depend on it.
+
 ## What It Does
 
 Two hardware registers control CU availability on Cyan Skillfish, and both need to be modified:
