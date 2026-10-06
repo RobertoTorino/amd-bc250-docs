@@ -1,5 +1,18 @@
 # 40 CU Unlock
 
+You can unlock all 40 CU's but are they really stable? bc250-cu-bisect tells bad CUs apart from an unstable CU unlock and gives you an honest report concerning the state of your CU's.
+It let's you only unlock stable even pairs. The whole process takes time but it gives you the benefit of a robust system.
+
+Every BC-250 die differs: AMD fuses off WGPs that failed validation. But a crash after a CU unlock doesn't have to mean a bad WGP. 
+A runtime unlock writes GPU registers while the driver is running, the kernel and RADV keep their 24-CU view, and extra CUs draw more power at the same voltage. 
+Crashes that move from one CU pair to another usually point to the unlock, power or heat, not to bad silicon.
+
+bc250-cu-bisect does its own unlock, so no other tool is involved, and tests in a way that separates these causes.
+Warning: this writes GPU registers. 
+A bad WGP or the unlock itself can freeze the system. 
+Save your work first. Use at your own risk.
+
+
 The BC-250 ships with 24 of 40 RDNA2 Compute Units active. The remaining 16 CUs are not physically damaged, they are fused off in firmware. The community has found a way to re-enable them at the driver level, with no permanent hardware changes and no firmware modification.
 
 !!!success "Credits"
